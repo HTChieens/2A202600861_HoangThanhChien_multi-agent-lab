@@ -1,1 +1,1 @@
-"""Workflow graph skeleton."""
+"""Workflow graph package."""

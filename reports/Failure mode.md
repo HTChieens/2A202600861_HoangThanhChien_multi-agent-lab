@@ -1,0 +1,5 @@
+### Failure mode và cách fix
+
+Trong quá trình chạy hệ thống, failure mode chính là các external provider có thể thiếu cấu hình hoặc trả lỗi xác thực. Ví dụ, khi `TAVILY_API_KEY` chưa đúng, Researcher không lấy được source thật và workflow phải dùng local search fallback, làm `citation_coverage=0%` trong benchmark report. Cách fix là kiểm tra lại `.env`, đảm bảo `TAVILY_API_KEY` hợp lệ, không có khoảng trắng hoặc copy nhầm key, rồi chạy lại benchmark để xác nhận `sources > 0`, `citation_coverage=100%`, và `errors=0`.
+
+Một failure mode khác là có `LANGSMITH_API_KEY` nhưng chưa có trace trên LangSmith vì code chỉ ghi local trace trong `ResearchState.trace`. Cách fix là thêm LangSmith tracing adapter vào workflow để tạo run, update output cuối, flush trace buffer, và ghi URL trace vào benchmark report. Sau khi fix, report có link trace LangSmith cho multi-agent workflow.

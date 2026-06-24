@@ -1,4 +1,4 @@
-"""Agent skeletons."""
+"""Agent implementations."""
 
 from multi_agent_research_lab.agents.analyst import AnalystAgent
 from multi_agent_research_lab.agents.critic import CriticAgent

@@ -1,7 +1,7 @@
 """Base agent contract.
 
-The concrete agent classes intentionally contain TODOs. The goal is to force students
-to make design decisions instead of receiving a finished implementation.
+Concrete agents read and update the shared research state while keeping their
+responsibilities narrow and inspectable.
 """
 
 from abc import ABC, abstractmethod

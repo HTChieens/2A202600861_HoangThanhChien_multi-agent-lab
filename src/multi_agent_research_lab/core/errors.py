@@ -1,4 +1,4 @@
-"""Domain-specific errors for the lab skeleton."""
+"""Domain-specific errors for the lab package."""
 
 
 class LabError(Exception):

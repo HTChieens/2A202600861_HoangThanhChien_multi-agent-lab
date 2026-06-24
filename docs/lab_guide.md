@@ -22,7 +22,12 @@ File gợi ý:
 - `src/multi_agent_research_lab/cli.py`
 - `src/multi_agent_research_lab/services/llm_client.py`
 
-TODO(student): thay baseline placeholder bằng một call LLM thật.
+Baseline hiện gọi `LLMClient.complete()`, ghi `final_answer`, token usage và latency vào trace. Chạy:
+
+```bash
+python -m multi_agent_research_lab.cli baseline \
+  --query "Research GraphRAG state-of-the-art and write a 500-word summary"
+```
 
 ## Milestone 2: Supervisor
 
@@ -31,7 +36,11 @@ File gợi ý:
 - `src/multi_agent_research_lab/agents/supervisor.py`
 - `src/multi_agent_research_lab/graph/workflow.py`
 
-TODO(student): implement routing policy.
+Routing policy hiện chạy tuần tự có kiểm soát:
+
+```text
+researcher -> analyst -> writer -> critic -> done
+```
 
 Gợi ý câu hỏi thiết kế:
 
@@ -49,7 +58,12 @@ File gợi ý:
 - `agents/analyst.py`
 - `agents/writer.py`
 
-TODO(student): implement từng worker.
+Các worker hiện đã có implementation:
+
+- `ResearcherAgent`: lấy nguồn qua `SearchClient`, fallback local nếu chưa cấu hình search provider.
+- `AnalystAgent`: tạo structured insights từ research notes.
+- `WriterAgent`: viết final answer từ research/analysis notes.
+- `CriticAgent`: review final answer và ghi findings.
 
 ## Milestone 4: Trace và benchmark
 
@@ -68,6 +82,15 @@ Benchmark tối thiểu:
 | Quality | rubric 0-10 do peer review |
 | Citation coverage | số claims có source / tổng claims chính |
 | Failure rate | số query fail / tổng query |
+
+Chạy report:
+
+```bash
+python -m multi_agent_research_lab.cli benchmark \
+  --query "Research GraphRAG state-of-the-art and write a 500-word summary"
+```
+
+Output mặc định: `reports/benchmark_report.md`.
 
 ## Exit ticket
 
